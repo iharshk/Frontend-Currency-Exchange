@@ -1,0 +1,48 @@
+<div class="mainContainer">
+    <div *ngIf="showLoader" class="loading">Loading&#8230;</div>
+
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-md-7 mx-auto text-center">
+        <h1 class="mb-4 text-center">Currency Exchange</h1>
+        <form *ngIf = "currencyForm" [formGroup] = "currencyForm">
+          <div class="row">
+            <div class="col-10">
+              <select class="form-control" formControlName = "country">
+                <option value="">Please Select</option>
+                <ng-container *ngFor="let item of countryList">
+                  <option [value] = "item.key">{{item.country}}</option>
+                </ng-container>
+              </select>
+              <ng-container *ngIf="showError">
+                  <h5 style="color:white"> Please select a country </h5>
+              </ng-container>
+            </div>
+            <div class="col-2">
+              <button type="submit" class="btn btn-primary mb-2" (click)="submit()">Convert</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <table *ngIf="showTable" class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Country</th>
+                    <th scope="col">Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of countryList">
+                    <td>{{item.country}}</td>
+                    <td>{{item[item.key]}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
